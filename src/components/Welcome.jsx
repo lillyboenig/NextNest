@@ -1,105 +1,195 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/Logo.jpg';
 
 const Welcome = () => {
   const navigate = useNavigate();
 
-  // Inline styles for all sections
+  // =========================
+  // General Page Layout
+  // =========================
+  const pageWrapperStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+    fontFamily: "'Roboto', sans-serif",
+    color: '#333',
+  };
 
-  // Header styles
+  // =========================
+  // HEADER STYLES
+  // =========================
   const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '1rem',
-    backgroundColor: '#eee',
+    padding: '0.75rem 2rem',
+    backgroundColor: '#fff',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
   };
+
   const logoStyle = {
-    margin: 0,
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
+    height: '40px',
+    width: 'auto',
   };
+
   const navLinkStyle = {
     textDecoration: 'none',
-    color: '#333',
+    color: '#fff',
+    backgroundColor: '#24295B', // navy
     padding: '0.5rem 1rem',
-    border: '1px solid #333',
     borderRadius: '4px',
+    fontWeight: 'bold',
+    transition: 'background-color 0.3s ease',
   };
 
-  // Hero section styles
-  const heroStyle = {
+  // Hover effect (if you add a class or style for hover in an external CSS, omit here)
+  // For inline style, you'd handle it via a mouse event or styled-components.
+  
+  // =========================
+  // HERO SECTION STYLES
+  // =========================
+  // Use the image from your design as the hero background
+  // (replace the placeholder URL with the actual path/URL to your hero image).
+  const heroSectionStyle = {
     position: 'relative',
-    background: "url('https://via.placeholder.com/1200x600') no-repeat center center",
+    backgroundImage: "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')", 
     backgroundSize: 'cover',
-    color: 'white',
+    backgroundPosition: 'center',
     padding: '4rem 2rem',
     textAlign: 'center',
-  };
-  const heroOverlayStyle = {
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    padding: '2rem',
-  };
-  const heroContentStyle = {
-    maxWidth: '800px',
-    margin: '0 auto',
-  };
-  const heroButtonStyle = {
-    margin: '0.5rem',
-    padding: '0.75rem 1.5rem',
-    border: 'none',
-    cursor: 'pointer',
-  };
-  const btnPrimaryStyle = {
-    ...heroButtonStyle,
-    backgroundColor: '#007bff',
-    color: 'white',
-  };
-  const btnSecondaryStyle = {
-    ...heroButtonStyle,
-    backgroundColor: '#6c757d',
-    color: 'white',
-  };
-  const heroExtraTextStyle = {
-    marginTop: '1rem',
-    fontStyle: 'italic',
+    color: '#fff',
   };
 
-  // MoreInfo section styles
-  const moreInfoStyle = {
+  const heroOverlayStyle = {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: '3rem 2rem',
+  };
+
+  const heroTitleStyle = {
+    fontSize: '2.5rem',
+    margin: '0 0 1rem',
+    fontWeight: 'bold',
+  };
+
+  const heroSubtitleStyle = {
+    fontSize: '1.25rem',
+    margin: '0 auto 2rem',
+    maxWidth: '700px',
+    lineHeight: 1.6,
+  };
+
+  const heroButtonContainerStyle = {
+    marginTop: '3rem',
+  };
+
+  const primaryButtonStyle = {
+    backgroundColor: '#24295B', 
+    color: '#fff',
+    border: 'none',
+    padding: '0.75rem 1.5rem',
+    marginRight: '1rem',
+    cursor: 'pointer',
+    borderRadius: '4px',
+    fontSize: '1rem',
+  };
+
+  const secondaryButtonStyle = {
+    backgroundColor: '#6c757d',
+    color: '#fff',
+    border: 'none',
+    padding: '0.75rem 1.5rem',
+    cursor: 'pointer',
+    borderRadius: '4px',
+    fontSize: '1rem',
+  };
+
+  // =========================
+  // WHY NEXTNEST SECTION
+  // =========================
+  const whyNextNestSectionStyle = {
     backgroundColor: '#f9f9f9',
-    padding: '2rem',
+    padding: '3rem 2rem',
     textAlign: 'center',
   };
-  const containerStyle = {
-    maxWidth: '800px',
+
+  const whyNextNestContainerStyle = {
+    maxWidth: '900px',
     margin: '0 auto',
   };
 
-  // Profile cards section styles
-  const profileCardsStyle = {
+  const whyNextNestHeaderStyle = {
+    fontSize: '2rem',
+    marginBottom: '2rem',
+    color: '#24295B',
+    fontWeight: 'bold',
+  };
+
+  const whyNextNestParagraphStyle = {
+    textAlign: 'left',
+    lineHeight: 1.6,
+    marginBottom: '2rem',
+  };
+
+  // =========================
+  // PROFILE CARDS SECTION
+  // =========================
+  const profileCardsSectionStyle = {
     display: 'flex',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    padding: '2rem',
+    padding: '2rem 1rem',
+    maxWidth: '1100px',
+    margin: '0 auto',
   };
+
   const cardStyle = {
-    flex: '1 1 150px',
-    maxWidth: '200px',
+    flex: '1 1 200px',
+    maxWidth: '220px',
     margin: '1rem',
+    backgroundColor: '#fff',
     textAlign: 'center',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    borderRadius: '6px',
+    overflow: 'hidden',
   };
+
   const cardImgStyle = {
     width: '100%',
     height: 'auto',
-    borderRadius: '50%',
   };
 
-  // Footer styles
+  const cardContentStyle = {
+    padding: '1rem',
+  };
+
+  const cardNameStyle = {
+    margin: '0.5rem 0',
+    fontSize: '1.1rem',
+    fontWeight: 'bold',
+    color: '#000080',
+  };
+
+  const cardDescStyle = {
+    fontSize: '0.9rem',
+    color: '#555',
+  };
+
+  // =========================
+  // FOOTER STYLES
+  // =========================
   const footerStyle = {
-    backgroundColor: '#eee',
+    backgroundColor: '#fafafa',
     textAlign: 'center',
     padding: '1rem',
+    borderTop: '1px solid #ccc',
+  };
+
+  const footerLinkStyle = {
+    margin: '0 1rem',
+    textDecoration: 'none',
+    color: '#000080',
+    fontWeight: 'bold',
   };
 
   return (
@@ -107,7 +197,8 @@ const Welcome = () => {
       {/* HEADER */}
       <header style={headerStyle}>
         <div className="logo">
-          <h1 style={logoStyle}>NextNest</h1>
+          {/* Replace the text with an image */}
+          <img src={logo} alt="NextNest Logo" style={logoStyle} />
         </div>
         <nav>
           <a style={navLinkStyle} href="/login">
@@ -116,61 +207,85 @@ const Welcome = () => {
         </nav>
       </header>
 
-      {/* MAIN CONTENT */}
-      <main style={{ flex: 1 }}>
-        {/* HERO SECTION */}
-        <section style={heroStyle}>
-          <div style={heroOverlayStyle}>
-            <div style={heroContentStyle}>
-              <h1>Welcome to NextNest</h1>
-              <p>
-                Discover a new way of connecting. Our platform offers unique solutions that bring you
-                closer to what matters.
-              </p>
-              <div>
-                <button style={btnPrimaryStyle}>More About Us</button>
-                <button style={btnSecondaryStyle} onClick={() => navigate('/create-account')}>
-                  Create an Account
-                </button>
-              </div>
-              <div style={heroExtraTextStyle}>
-                <p>
-                  Join us today and experience a community designed with you in mind. We’re more than
-                  just a website; we’re a lifestyle.
-                </p>
-              </div>
+      {/* =========================================
+          HERO SECTION
+      ========================================= */}
+      <section style={heroSectionStyle}>
+        <div style={heroOverlayStyle}>
+          <h2 style={heroTitleStyle}>WELCOME TO YOUR FUTURE NEST</h2>
+          <p style={heroSubtitleStyle}>
+            NextNest: Neighborhood insights that help you discover your dream home with
+            advanced location-based data. Explore real, accurate data about schools,
+            communities, and local amenities—empowering you to make the smartest decisions.
+          </p>
+          <div style={heroButtonContainerStyle}>
+            {/* Example button for "More About Us" – you can link this wherever you'd like */}
+            <button style={primaryButtonStyle}>About NextNest</button>
+            <button style={secondaryButtonStyle} onClick={() => navigate('/create-account')}>
+              Create an Account
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================
+          WHY NEXTNEST SECTION
+      ========================================= */}
+      <section style={whyNextNestSectionStyle}>
+        <div style={whyNextNestContainerStyle}>
+          <h3 style={whyNextNestHeaderStyle}>Why NextNest?</h3>
+          <p style={whyNextNestParagraphStyle}>
+            <strong>Because Data Matters.</strong> At NextNest, we provide transparent data-driven
+            insights from real sources, giving you clarity and confidence in your property search. We
+            understand that choosing your future nest is about more than just location; it’s about
+            community, convenience, and peace of mind.
+          </p>
+          <p style={whyNextNestParagraphStyle}>
+            We ensure your new neighborhood matches exactly what you’re looking for. From local
+            amenities to historical market trends, our platform keeps you connected, informed, and
+            prepared to make your next move with ease. Whether you're seeking your first home or a
+            luxury upgrade, NextNest ensures every decision is well-informed and truly empowering.
+          </p>
+        </div>
+      </section>
+
+      {/* =========================================
+          PROFILE CARDS SECTION
+      ========================================= */}
+      <section style={profileCardsSectionStyle}>
+        {[
+          { name: 'Sophie Wolf', desc: '“Life is to short to live at the wrong place!”' },
+          { name: 'Lilly Bönig', desc: '“In the end we only regret the chances we didn’t take”' },
+          { name: 'Henna Törmänen', desc: '“Some random Quote of the person”' },
+          { name: 'Elena Müller', desc: '“Alcohol is bad. Except of when you get mojito then drink mojito”' },
+        ].map((person, idx) => (
+          <div key={idx} style={cardStyle}>
+            <img
+              style={cardImgStyle}
+              src="https://via.placeholder.com/150"
+              alt={`${person.name}`}
+            />
+            <div style={cardContentStyle}>
+              <h4 style={cardNameStyle}>{person.name}</h4>
+              <p style={cardDescStyle}>{person.desc}</p>
             </div>
           </div>
-        </section>
+        ))}
+      </section>
 
-        {/* MORE INFO SECTION */}
-        <section style={moreInfoStyle}>
-          <div style={containerStyle}>
-            <h2>About NextNest</h2>
-            <p>
-              NextNest is dedicated to providing a seamless experience where you can connect with
-              like-minded individuals. Our platform is built with the latest technologies, ensuring a
-              secure and intuitive user experience. Whether you're looking for collaboration or
-              community, NextNest is here to support you. Stay tuned for more features, updates, and
-              exciting announcements!
-            </p>
-          </div>
-        </section>
-
-        {/* PROFILE CARDS SECTION */}
-        <section style={profileCardsStyle}>
-          {[1, 2, 3, 4].map((card) => (
-            <div key={card} style={cardStyle}>
-              <img style={cardImgStyle} src="https://via.placeholder.com/150" alt="Placeholder" />
-              <h3>Name Name</h3>
-            </div>
-          ))}
-        </section>
-      </main>
-
-      {/* FOOTER */}
+      {/* =========================================
+          FOOTER
+      ========================================= */}
       <footer style={footerStyle}>
-        <p>&copy; 2025 NextNest</p>
+        <div>
+          <a href="/support" style={footerLinkStyle}>
+            Support
+          </a>
+          <a href="/data-security" style={footerLinkStyle}>
+            Data Security
+          </a>
+        </div>
+        <p style={{ marginTop: '0.5rem', color: '#777' }}>&copy; 2025 NextNest</p>
       </footer>
     </div>
   );
