@@ -1,6 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/Logo.jpg';
+import elenaImg from '../images/profile-card_Müller.jpeg';
+import sophieImg from '../images/profile-card_Wolf.jpeg';
+import lillyImg from '../images/profile-card_Bönig.jpg';
+import placeholderImg from '../images/placeholder.jpg';
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -134,6 +138,30 @@ const Welcome = () => {
   // =========================
   // PROFILE CARDS SECTION
   // =========================
+
+  const profiles = [
+    {
+      name: 'Sophie Wolf',
+      desc: '“Life is to short to live at the wrong place!”',
+      imgSrc: sophieImg,
+    },
+    {
+      name: 'Lilly Bönig',
+      desc: '“In the end we only regret the chances we didn’t take”',
+      imgSrc: lillyImg,
+    },
+    {
+      name: 'Henna Törmänen',
+      desc: '“Some random Quote of the person”',
+      imgSrc: placeholderImg,
+    },
+    {
+      name: 'Elena Müller',
+      desc: '“Alcohol is bad. Except of when you get mojito then drink mojito”',
+      imgSrc: elenaImg,
+    },
+  ];
+  
   const profileCardsSectionStyle = {
     display: 'flex',
     justifyContent: 'space-around',
@@ -253,24 +281,20 @@ const Welcome = () => {
           PROFILE CARDS SECTION
       ========================================= */}
       <section style={profileCardsSectionStyle}>
-        {[
-          { name: 'Sophie Wolf', desc: '“Life is to short to live at the wrong place!”' },
-          { name: 'Lilly Bönig', desc: '“In the end we only regret the chances we didn’t take”' },
-          { name: 'Henna Törmänen', desc: '“Some random Quote of the person”' },
-          { name: 'Elena Müller', desc: '“Alcohol is bad. Except of when you get mojito then drink mojito”' },
-        ].map((person, idx) => (
-          <div key={idx} style={cardStyle}>
-            <img
-              style={cardImgStyle}
-              src="https://via.placeholder.com/150"
-              alt={`${person.name}`}
-            />
-            <div style={cardContentStyle}>
-              <h4 style={cardNameStyle}>{person.name}</h4>
-              <p style={cardDescStyle}>{person.desc}</p>
-            </div>
-          </div>
-        ))}
+      {profiles.map((person, idx) => (
+  <div key={idx} style={cardStyle}>
+    <img
+      style={cardImgStyle}
+      src={person.imgSrc}
+      alt={person.name}
+    />
+    <div style={cardContentStyle}>
+      <h4 style={cardNameStyle}>{person.name}</h4>
+      <p style={cardDescStyle}>{person.desc}</p>
+    </div>
+  </div>
+))}
+
       </section>
 
       {/* =========================================
