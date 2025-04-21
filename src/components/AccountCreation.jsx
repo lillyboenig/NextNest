@@ -1,92 +1,97 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/Logo.jpg';
 
 const AccountCreation = () => {
   const navigate = useNavigate();
 
-  // Container style for the whole page
-  const containerStyle = {
+  // ========================================
+  // Shared “Page Wrapper”
+  // ========================================
+  const pageWrapperStyle = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    margin: 0,
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: "'Roboto', sans-serif",
+    color: '#333',
   };
 
-  // Header styles
+  // ========================================
+  // HEADER (matches Welcome header)
+  // ========================================
   const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '1rem',
-    backgroundColor: '#eee',
+    padding: '0.75rem 2rem',
+    backgroundColor: '#fff',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
   };
-
-  const logoStyle = {
-    margin: 0,
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-  };
-
-  const hamburgerMenuStyle = {
-    width: '30px',
-    height: '30px',
-    backgroundColor: '#ccc',
+  const logoStyle = { height: '40px', width: 'auto' };
+  const hamburgerStyle = {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '4px',
+    flexDirection: 'column',
+    gap: '4px',
     cursor: 'pointer',
   };
+  const hamburgerBarStyle = {
+    width: '25px',
+    height: '3px',
+    backgroundColor: '#24295B',
+  };
 
-  // Main content styles (form area)
-  const mainStyle = {
+  // ========================================
+  // HERO WRAPPER (background image + overlay)
+  // ========================================
+  const heroSectionStyle = {
+    position: 'relative',
+    backgroundImage:
+      "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     flex: 1,
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f4f4f4',
-    padding: '2rem',
+    justifyContent: 'center',
   };
-
-  // Form card styles
-  const formCardStyle = {
-    backgroundColor: '#ddd',
-    padding: '2rem',
+  const heroOverlayStyle = {
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    padding: '3rem 2rem',
     borderRadius: '8px',
-    maxWidth: '400px',
     width: '100%',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+    maxWidth: '800px',
   };
 
-  const titleStyle = {
-    marginBottom: '1.5rem',
+  // ========================================
+  // FORM STYLES
+  // ========================================
+  const formTitleStyle = {
+    fontSize: '2rem',
+    color: '#24295B',
     textAlign: 'center',
-    fontSize: '1.5rem',
+    marginBottom: '2rem',
   };
-
   const formGroupStyle = {
     display: 'flex',
     flexDirection: 'column',
-    marginBottom: '1rem',
+    marginBottom: '1.25rem',
   };
-
   const labelStyle = {
-    marginBottom: '0.3rem',
-    fontWeight: 'bold',
+    marginBottom: '0.5rem',
+    color: '#24295B',
+    fontWeight: '500',
+    fontSize: '0.95rem',
   };
-
   const inputStyle = {
-    padding: '0.5rem',
+    padding: '0.75rem',
     borderRadius: '4px',
     border: '1px solid #ccc',
     fontSize: '1rem',
   };
-
-  const buttonStyle = {
-    marginTop: '1rem',
-    padding: '0.75rem 1rem',
-    backgroundColor: '#333',
+  const createBtnStyle = {
+    marginTop: '1.5rem',
+    padding: '0.75rem 1.5rem',
+    backgroundColor: '#24295B',
     color: '#fff',
     border: 'none',
     borderRadius: '4px',
@@ -95,93 +100,91 @@ const AccountCreation = () => {
     width: '100%',
   };
 
-  // Footer styles
+  // ========================================
+  // FOOTER (matches Welcome footer)
+  // ========================================
   const footerStyle = {
+    backgroundColor: '#fafafa',
     textAlign: 'center',
     padding: '1rem',
-    backgroundColor: '#eee',
+    borderTop: '1px solid #ccc',
+  };
+  const footerLinkStyle = {
+    margin: '0 1rem',
+    textDecoration: 'none',
+    color: '#24295B',
+    fontWeight: '500',
   };
 
   return (
-    <div style={containerStyle}>
-      {/* HEADER */}
+    <div style={pageWrapperStyle}>
+      {/* -- HEADER -- */}
       <header style={headerStyle}>
-        <h1 style={logoStyle}>NextNest</h1>
-        <div style={hamburgerMenuStyle}>
-          {/* Hamburger icon placeholder */}
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333', marginBottom: '3px' }} />
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333', marginBottom: '3px' }} />
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333' }} />
+        <img src={logo} alt="NextNest Logo" style={logoStyle} />
+        <div style={hamburgerStyle} onClick={() => {/* open menu */}}>
+          <div style={hamburgerBarStyle} />
+          <div style={hamburgerBarStyle} />
+          <div style={hamburgerBarStyle} />
         </div>
       </header>
 
-      {/* MAIN CONTENT - ACCOUNT CREATION FORM */}
-      <main style={mainStyle}>
-        <div style={formCardStyle}>
-          <h2 style={titleStyle}>Create your Account</h2>
+      {/* -- HERO/BACKGROUND + OVERLAYED FORM -- */}
+      <section style={heroSectionStyle}>
+        <div style={heroOverlayStyle}>
+          <h2 style={formTitleStyle}>Create your Account</h2>
 
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="name">
-              Name
-            </label>
+            <label style={labelStyle} htmlFor="name">Name</label>
             <input style={inputStyle} type="text" id="name" placeholder="Enter your name" />
           </div>
 
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="firstname">
-              First name
-            </label>
+            <label style={labelStyle} htmlFor="firstname">First name</label>
             <input style={inputStyle} type="text" id="firstname" placeholder="Enter your first name" />
           </div>
 
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="mail">
-              Mail
-            </label>
+            <label style={labelStyle} htmlFor="mail">Mail</label>
             <input style={inputStyle} type="email" id="mail" placeholder="Enter your email" />
           </div>
 
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="address">
-              Address
-            </label>
+            <label style={labelStyle} htmlFor="address">Address</label>
             <input style={inputStyle} type="text" id="address" placeholder="Enter your address" />
           </div>
 
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="password">
-              Password
-            </label>
+            <label style={labelStyle} htmlFor="password">Password</label>
             <input style={inputStyle} type="password" id="password" placeholder="Enter your password" />
           </div>
 
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="confirmPassword">
-              Password - 2
-            </label>
+            <label style={labelStyle} htmlFor="confirmPassword">Confirm Password</label>
             <input
               style={inputStyle}
               type="password"
               id="confirmPassword"
-              placeholder="Confirm your password"
+              placeholder="Re‑enter your password"
             />
           </div>
 
           <button
-            style={buttonStyle}
-            type="button"
-            onClick={() =>
-                navigate('/my-account', { state: { newAccount: true } })
-              }
+            style={createBtnStyle}
+            onClick={() => navigate('/my-account', { state: { newAccount: true } })}
           >
             Create Account
           </button>
         </div>
-      </main>
+      </section>
 
-      {/* FOOTER */}
+      {/* -- FOOTER -- */}
       <footer style={footerStyle}>
-        <p>&copy; 2025 NextNest</p>
+        <nav>
+          <a href="/support" style={footerLinkStyle}>Support</a>
+          <a href="/data-security" style={footerLinkStyle}>Data Security</a>
+          <a href="/info" style={footerLinkStyle}>Info</a>
+        </nav>
+        <p style={{ marginTop: '0.5rem', color: '#777' }}>&copy; 2025 NextNest</p>
       </footer>
     </div>
   );
