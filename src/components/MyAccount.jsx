@@ -1,6 +1,7 @@
 // src/components/MyAccount.jsx
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import logo from '../images/Logo.png';
 
 const MyAccount = () => {
   const navigate = useNavigate();
@@ -13,69 +14,79 @@ const MyAccount = () => {
     }
   }, [location.state]);
 
-  // Inline styles for the account page:
-  const containerStyle = {
+  // -----------------------------------
+  // Page wrapper (shared)
+  // -----------------------------------
+  const pageWrapperStyle = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    margin: 0,
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: "'Roboto', sans-serif",
+    color: '#333',
   };
 
+  // -----------------------------------
+  // HEADER (shared)
+  // -----------------------------------
   const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '1rem',
-    backgroundColor: '#eee',
+    padding: '0.75rem 2rem',
+    backgroundColor: '#fff',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
   };
-
-  const logoStyle = {
-    margin: 0,
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-  };
-
-  const hamburgerMenuStyle = {
-    width: '30px',
-    height: '30px',
-    backgroundColor: '#ccc',
+  const logoStyle = { height: '40px', width: 'auto' };
+  const hamburgerStyle = {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '4px',
+    flexDirection: 'column',
+    gap: '4px',
     cursor: 'pointer',
   };
-
-  const mainStyle = {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f4f4f4',
-    padding: '2rem',
+  const hamburgerBarStyle = {
+    width: '25px',
+    height: '3px',
+    backgroundColor: '#24295B',
   };
 
-  const cardStyle = {
-    backgroundColor: '#ddd',
-    padding: '2rem',
+  // -----------------------------------
+  // HERO (background + overlay)
+  // -----------------------------------
+  const heroSectionStyle = {
+    position: 'relative',
+    backgroundImage:
+      "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    padding: '6rem 2rem',
+    flex: 1,
+  };
+  const heroOverlayStyle = {
+    backgroundColor: 'rgba(255,255,255,0.85)',
+    padding: '3rem 2rem',
     borderRadius: '8px',
-    maxWidth: '400px',
     width: '100%',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+    maxWidth: '900px',
+    margin: '0 auto',
+    textAlign: 'left',
+  };
+
+  // -----------------------------------
+  // Content styles
+  // -----------------------------------
+  const greetingStyle = {
+    fontSize: '2rem',
+    color: '#24295B',
+    marginBottom: '2rem',
     textAlign: 'center',
   };
 
-  const greetingStyle = {
-    marginBottom: '1.5rem',
-    fontSize: '1.5rem',
-  };
-
-  const buttonContainerStyle = {
+  // grid for 2 columns × 3 rows
+  const gridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '1rem',
-    marginBottom: '1rem',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '1rem 2rem',
+    marginBottom: '2rem',
   };
 
   const buttonStyle = {
@@ -83,63 +94,69 @@ const MyAccount = () => {
     borderRadius: '4px',
     border: 'none',
     backgroundColor: '#fff',
-    cursor: 'pointer',
+    color: '#24295B',
     fontSize: '1rem',
+    cursor: 'pointer',
+    width: '100%',
   };
 
   const extraLinksStyle = {
-    marginTop: '1rem',
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '2rem',
+    color: '#24295B',
     fontSize: '0.9rem',
-    color: '#555',
   };
 
+  // -----------------------------------
+  // FOOTER (shared)
+  // -----------------------------------
   const footerStyle = {
+    backgroundColor: '#fafafa',
     textAlign: 'center',
     padding: '1rem',
-    backgroundColor: '#eee',
+    borderTop: '1px solid #ccc',
+  };
+  const footerLinkStyle = {
+    margin: '0 1rem',
+    textDecoration: 'none',
+    color: '#24295B',
+    fontWeight: '500',
   };
 
-  // Modal styles:
+  // -----------------------------------
+  // MODAL (shared pattern)
+  // -----------------------------------
   const modalOverlayStyle = {
     position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
+    top: 0, left: 0, width: '100%', height: '100%',
     backgroundColor: 'rgba(0,0,0,0.7)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: 'flex', justifyContent: 'center', alignItems: 'center',
     zIndex: 1000,
   };
-
   const modalContentStyle = {
     position: 'relative',
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     padding: '2rem',
     borderRadius: '8px',
     maxWidth: '500px',
     width: '90%',
     textAlign: 'center',
   };
-
   const modalButtonStyle = {
     marginTop: '1rem',
     padding: '1rem',
-    backgroundColor: '#007bff',
-    color: 'white',
+    backgroundColor: '#24295B',
+    color: '#fff',
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer',
     fontSize: '1rem',
     width: '100%',
   };
-
   const modalCloseButtonStyle = {
     position: 'absolute',
-    top: '10px',
-    right: '10px',
+    top: '10px', right: '10px',
     background: 'transparent',
     border: 'none',
     fontSize: '1.2rem',
@@ -147,48 +164,65 @@ const MyAccount = () => {
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={pageWrapperStyle}>
       {/* HEADER */}
       <header style={headerStyle}>
-        <h1 style={logoStyle}>NextNest</h1>
-        <div style={hamburgerMenuStyle}>
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333', marginBottom: '3px' }} />
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333', marginBottom: '3px' }} />
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333' }} />
+        <img src={logo} alt="NextNest Logo" style={logoStyle} />
+        <div style={hamburgerStyle}>
+          <div style={hamburgerBarStyle} />
+          <div style={hamburgerBarStyle} />
+          <div style={hamburgerBarStyle} />
         </div>
       </header>
 
-      {/* MAIN CONTENT */}
-      <main style={mainStyle}>
-        <div style={cardStyle}>
+      {/* HERO + ACCOUNT DASHBOARD */}
+      <section style={heroSectionStyle}>
+        <div style={heroOverlayStyle}>
           <h2 style={greetingStyle}>Hello, Matti!</h2>
-          <div style={buttonContainerStyle}>
+
+          <div style={gridStyle}>
             <button style={buttonStyle} onClick={() => navigate('/preferences')}>
               Your Preferences
             </button>
-            <button
-              style={buttonStyle}
-              onClick={() => navigate('/map')} >
+            <button style={buttonStyle} onClick={() => navigate('/map')}>
               Map
             </button>
-            <button style={buttonStyle}>Recommendations</button>
-            <button style={buttonStyle}>Comparing</button>
-            <button style={buttonStyle}>Favourites</button>
-            <button style={buttonStyle}>Settings</button>
+            <button style={buttonStyle} onClick={() => navigate('/recommendations')}>
+              Recommendations
+            </button>
+            <button style={buttonStyle} onClick={() => navigate('/comparing')}>
+              Comparing
+            </button>
+            <button style={buttonStyle} onClick={() => navigate('/favourites')}>
+              Favourites
+            </button>
+            <button style={buttonStyle} onClick={() => navigate('/settings')}>
+              Settings
+            </button>
           </div>
+
           <div style={extraLinksStyle}>
-            <p>Help - Support Service</p>
-            <p>Log out</p>
+            <span onClick={() => navigate('/support')} style={{ cursor: 'pointer' }}>
+              Help – Support Service
+            </span>
+            <span onClick={() => {/* logout logic */}} style={{ cursor: 'pointer' }}>
+              Log out
+            </span>
           </div>
         </div>
-      </main>
+      </section>
 
       {/* FOOTER */}
       <footer style={footerStyle}>
-        <p>&copy; 2025 NextNest</p>
+        <nav>
+          <a href="/support" style={footerLinkStyle}>Support</a>
+          <a href="/data-security" style={footerLinkStyle}>Data Security</a>
+          <a href="/info" style={footerLinkStyle}>Info</a>
+        </nav>
+        <p style={{ marginTop: '0.5rem', color: '#777' }}>&copy; 2025 NextNest</p>
       </footer>
 
-      {/* Modal Popup (if user is new and preferences not set) */}
+      {/* MODAL */}
       {showPreferencesModal && (
         <div style={modalOverlayStyle}>
           <div style={modalContentStyle}>
@@ -199,9 +233,7 @@ const MyAccount = () => {
               &times;
             </button>
             <h2>No Preferences Set</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae massa sed mauris mollis feugiat.
-            </p>
+            <p>Please tell us your preferences so we can give you the best recommendations.</p>
             <button
               style={modalButtonStyle}
               onClick={() => {
