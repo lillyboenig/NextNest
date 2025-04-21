@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../images/Logo.jpg';
+import logo from '../images/Logo.png';
 
 const AccountCreation = () => {
   const navigate = useNavigate();
@@ -49,18 +49,21 @@ const AccountCreation = () => {
       "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    /* instead of flex:1 + display:flex */
+    padding: '6rem 2rem',      // ← push content in from top & bottom
+    textAlign: 'center',
+    color: '#fff',
   };
+
   const heroOverlayStyle = {
     backgroundColor: 'rgba(255, 255, 255, 0.85)',
     padding: '3rem 2rem',
     borderRadius: '8px',
     width: '100%',
     maxWidth: '800px',
+    margin: '0 auto',
   };
+
 
   // ========================================
   // FORM STYLES
@@ -99,6 +102,18 @@ const AccountCreation = () => {
     fontSize: '1rem',
     width: '100%',
   };
+  // at the top, with your other style objects:
+  const twoColumnRowStyle = {
+    display: 'flex',
+    gap: '1rem',
+    marginBottom: '1.5rem',
+  };
+  const formGroupHalfStyle = {
+    flex: '1 1 45%',
+    display: 'flex',
+    flexDirection: 'column',
+  };
+
 
   // ========================================
   // FOOTER (matches Welcome footer)
@@ -121,7 +136,7 @@ const AccountCreation = () => {
       {/* -- HEADER -- */}
       <header style={headerStyle}>
         <img src={logo} alt="NextNest Logo" style={logoStyle} />
-        <div style={hamburgerStyle} onClick={() => {/* open menu */}}>
+        <div style={hamburgerStyle} onClick={() => {/* open menu */ }}>
           <div style={hamburgerBarStyle} />
           <div style={hamburgerBarStyle} />
           <div style={hamburgerBarStyle} />
@@ -133,39 +148,40 @@ const AccountCreation = () => {
         <div style={heroOverlayStyle}>
           <h2 style={formTitleStyle}>Create your Account</h2>
 
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="name">Name</label>
-            <input style={inputStyle} type="text" id="name" placeholder="Enter your name" />
+          {/* Row 1 */}
+          <div style={twoColumnRowStyle}>
+            <div style={formGroupHalfStyle}>
+              <label style={labelStyle} htmlFor="name">Name</label>
+              <input style={inputStyle} type="text" id="name" placeholder="Enter your name" />
+            </div>
+            <div style={formGroupHalfStyle}>
+              <label style={labelStyle} htmlFor="firstname">First name</label>
+              <input style={inputStyle} type="text" id="firstname" placeholder="Enter your first name" />
+            </div>
           </div>
 
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="firstname">First name</label>
-            <input style={inputStyle} type="text" id="firstname" placeholder="Enter your first name" />
+          {/* Row 2 */}
+          <div style={twoColumnRowStyle}>
+            <div style={formGroupHalfStyle}>
+              <label style={labelStyle} htmlFor="mail">Mail</label>
+              <input style={inputStyle} type="email" id="mail" placeholder="Enter your email" />
+            </div>
+            <div style={formGroupHalfStyle}>
+              <label style={labelStyle} htmlFor="address">Address</label>
+              <input style={inputStyle} type="text" id="address" placeholder="Enter your address" />
+            </div>
           </div>
 
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="mail">Mail</label>
-            <input style={inputStyle} type="email" id="mail" placeholder="Enter your email" />
-          </div>
-
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="address">Address</label>
-            <input style={inputStyle} type="text" id="address" placeholder="Enter your address" />
-          </div>
-
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="password">Password</label>
-            <input style={inputStyle} type="password" id="password" placeholder="Enter your password" />
-          </div>
-
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              style={inputStyle}
-              type="password"
-              id="confirmPassword"
-              placeholder="Re‑enter your password"
-            />
+          {/* Row 3 */}
+          <div style={twoColumnRowStyle}>
+            <div style={formGroupHalfStyle}>
+              <label style={labelStyle} htmlFor="password">Password</label>
+              <input style={inputStyle} type="password" id="password" placeholder="Enter your password" />
+            </div>
+            <div style={formGroupHalfStyle}>
+              <label style={labelStyle} htmlFor="confirmPassword">Confirm Password</label>
+              <input style={inputStyle} type="password" id="confirmPassword" placeholder="Re‑enter your password" />
+            </div>
           </div>
 
           <button

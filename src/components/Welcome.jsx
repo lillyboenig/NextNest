@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../images/Logo.jpg';
+import logo from '../images/Logo.png';
 import elenaImg from '../images/profile-card_Müller.jpeg';
 import sophieImg from '../images/profile-card_Wolf.jpeg';
 import lillyImg from '../images/profile-card_Bönig.jpg';
