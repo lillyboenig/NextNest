@@ -1,165 +1,197 @@
 // src/components/Login.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/Logo.png';
 
 const Login = () => {
-    const navigate = useNavigate();
-  // Container style
-  const containerStyle = {
+  const navigate = useNavigate();
+
+  // -----------------------------------
+  // Page wrapper
+  // -----------------------------------
+  const pageWrapperStyle = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    margin: 0,
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: "'Roboto', sans-serif",
+    color: '#333',
   };
 
-  // Header styles
+  // -----------------------------------
+  // HEADER (same as other pages)
+  // -----------------------------------
   const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '1rem',
-    backgroundColor: '#eee',
+    padding: '0.75rem 2rem',
+    backgroundColor: '#fff',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
   };
-
-  const logoStyle = {
-    margin: 0,
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-  };
-
-  const hamburgerMenuStyle = {
-    width: '30px',
-    height: '30px',
-    backgroundColor: '#ccc',
+  const logoStyle = { height: '40px', width: 'auto' };
+  const hamburgerStyle = {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '4px',
+    flexDirection: 'column',
+    gap: '4px',
     cursor: 'pointer',
   };
-
-  // Main content styles (form area)
-  const mainStyle = {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f4f4f4',
-    padding: '2rem',
+  const hamburgerBarStyle = {
+    width: '25px',
+    height: '3px',
+    backgroundColor: '#24295B',
   };
 
-  // Form card styles
-  const formCardStyle = {
-    backgroundColor: '#ddd',
-    padding: '2rem',
-    borderRadius: '8px',
-    maxWidth: '400px',
-    width: '100%',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-  };
-
-  const titleStyle = {
-    marginBottom: '1.5rem',
+  // -----------------------------------
+  // HERO (background + overlay)
+  // -----------------------------------
+  const heroSectionStyle = {
+    position: 'relative',
+    backgroundImage:
+      "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    padding: '6rem 2rem',
     textAlign: 'center',
-    fontSize: '1.5rem',
+    flex: 1,
+  };
+  const heroOverlayStyle = {
+    backgroundColor: 'rgba(255,255,255,0.85)',
+    padding: '3rem 2rem',
+    borderRadius: '8px',
+    width: '100%',
+    maxWidth: '500px',
+    margin: '0 auto',
+    textAlign: 'left',
   };
 
+  // -----------------------------------
+  // Form styles
+  // -----------------------------------
+  const formTitleStyle = {
+    fontSize: '2rem',
+    color: '#24295B',
+    marginBottom: '2rem',
+    textAlign: 'center',
+  };
   const formGroupStyle = {
     display: 'flex',
     flexDirection: 'column',
-    marginBottom: '1rem',
+    marginBottom: '1.5rem',
   };
-
   const labelStyle = {
-    marginBottom: '0.3rem',
-    fontWeight: 'bold',
+    marginBottom: '0.5rem',
+    color: '#24295B',
+    fontWeight: '500',
+    fontSize: '0.95rem',
   };
-
   const inputStyle = {
-    padding: '0.5rem',
+    padding: '0.75rem',
     borderRadius: '4px',
     border: '1px solid #ccc',
     fontSize: '1rem',
   };
-
+  const buttonWrapperStyle = {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  };
   const buttonStyle = {
     marginTop: '1rem',
-    padding: '0.75rem 1rem',
-    backgroundColor: '#333',
+    padding: '0.75rem 1.5rem',
+    backgroundColor: '#24295B',
     color: '#fff',
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer',
     fontSize: '1rem',
-    width: '100%',
   };
-
   const extraLinksStyle = {
-    marginTop: '1rem',
-    textAlign: 'center',
+    marginTop: '2rem',
     fontSize: '0.9rem',
-    color: '#555',
+    color: '#24295B',
+    lineHeight: 1.5,
   };
 
-  // Footer styles
+  // -----------------------------------
+  // FOOTER (same as other pages)
+  // -----------------------------------
   const footerStyle = {
+    backgroundColor: '#fafafa',
     textAlign: 'center',
     padding: '1rem',
-    backgroundColor: '#eee',
+    borderTop: '1px solid #ccc',
+  };
+  const footerLinkStyle = {
+    margin: '0 1rem',
+    textDecoration: 'none',
+    color: '#24295B',
+    fontWeight: '500',
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={pageWrapperStyle}>
       {/* HEADER */}
       <header style={headerStyle}>
-        <h1 style={logoStyle}>NextNest</h1>
-        <div style={hamburgerMenuStyle}>
-          {/* Hamburger icon placeholder */}
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333', marginBottom: '3px' }} />
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333', marginBottom: '3px' }} />
-          <div style={{ width: '15px', height: '2px', backgroundColor: '#333' }} />
+        <img src={logo} alt="NextNest Logo" style={logoStyle} />
+        <div style={hamburgerStyle}>
+          <div style={hamburgerBarStyle} />
+          <div style={hamburgerBarStyle} />
+          <div style={hamburgerBarStyle} />
         </div>
       </header>
 
-      {/* MAIN CONTENT - LOGIN FORM */}
-      <main style={mainStyle}>
-        <div style={formCardStyle}>
-          <h2 style={titleStyle}>Login</h2>
+      {/* HERO + LOGIN FORM */}
+      <section style={heroSectionStyle}>
+        <div style={heroOverlayStyle}>
+          <h2 style={formTitleStyle}>Login</h2>
 
+          {/* Email */}
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="email">
-              Your E-Mail:
-            </label>
-            <input style={inputStyle} type="email" id="email" placeholder="user@example.com" />
+            <label style={labelStyle} htmlFor="email">Your E‑Mail:</label>
+            <input
+              style={inputStyle}
+              type="email"
+              id="email"
+              placeholder="user@example.com"
+            />
           </div>
 
+          {/* Password */}
           <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="password">
-              Your Password:
-            </label>
-            <input style={inputStyle} type="password" id="password" placeholder="password" />
+            <label style={labelStyle} htmlFor="password">Your Password:</label>
+            <input
+              style={inputStyle}
+              type="password"
+              id="password"
+              placeholder="••••••••"
+            />
           </div>
 
-          <button
-            style={buttonStyle}
-            type="button"
-            onClick={() => navigate('/my-account')}
-          >
-            Sign In
-          </button>
+          {/* Button aligned right */}
+          <div style={buttonWrapperStyle}>
+            <button
+              style={buttonStyle}
+              onClick={() => navigate('/my-account')}
+            >
+              Sign In
+            </button>
+          </div>
 
-
+          {/* Extra links under form */}
           <div style={extraLinksStyle}>
-            <p>Forgot your password?</p>
-            <p>Help - Support Service</p>
+            <p style={{ margin: 0 }}>Forgot your password?</p>
+            <p style={{ margin: 0 }}>Help ‑ Support Service</p>
           </div>
         </div>
-      </main>
+      </section>
 
       {/* FOOTER */}
       <footer style={footerStyle}>
-        <p>&copy; 2025 NextNest</p>
+        <nav>
+          <a href="/support" style={footerLinkStyle}>Support</a>
+          <a href="/data-security" style={footerLinkStyle}>Data Security</a>
+          <a href="/info" style={footerLinkStyle}>Info</a>
+        </nav>
+        <p style={{ marginTop: '0.5rem', color: '#777' }}>&copy; 2025 NextNest</p>
       </footer>
     </div>
   );
