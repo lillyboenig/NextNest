@@ -1,10 +1,15 @@
-// src/components/Login.jsx
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/Logo.png';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   // -----------------------------------
   // Page wrapper
@@ -127,71 +132,64 @@ const Login = () => {
     fontWeight: '500',
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+    const ok = login(email.trim(), password);
+    if (!ok) {
+      setError('Invalid email or password');
+      return;
+    }
+    navigate('/my-account');
+  };
+
   return (
     <div style={pageWrapperStyle}>
-      {/* HEADER */}
       <header style={headerStyle}>
         <img src={logo} alt="NextNest Logo" style={logoStyle} />
-        <div style={hamburgerStyle}>
-          <div style={hamburgerBarStyle} />
-          <div style={hamburgerBarStyle} />
-          <div style={hamburgerBarStyle} />
-        </div>
+        {/* hamburger */}
       </header>
-
-      {/* HERO + LOGIN FORM */}
       <section style={heroSectionStyle}>
         <div style={heroOverlayStyle}>
           <h2 style={formTitleStyle}>Login</h2>
-
-          {/* Email */}
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="email">Your E‑Mail:</label>
-            <input
-              style={inputStyle}
-              type="email"
-              id="email"
-              placeholder="user@example.com"
-            />
-          </div>
-
-          {/* Password */}
-          <div style={formGroupStyle}>
-            <label style={labelStyle} htmlFor="password">Your Password:</label>
-            <input
-              style={inputStyle}
-              type="password"
-              id="password"
-              placeholder="••••••••"
-            />
-          </div>
-
-          {/* Button aligned right */}
-          <div style={buttonWrapperStyle}>
-            <button
-              style={buttonStyle}
-              onClick={() => navigate('/my-account')}
-            >
-              Sign In
-            </button>
-          </div>
-
-          {/* Extra links under form */}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <form onSubmit={handleSubmit}>
+            <div style={formGroupStyle}>
+              <label style={labelStyle} htmlFor="email">Your E‑Mail:</label>
+              <input
+                style={inputStyle}
+                type="email"
+                id="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="user@example.com"
+              />
+            </div>
+            <div style={formGroupStyle}>
+              <label style={labelStyle} htmlFor="password">Your Password:</label>
+              <input
+                style={inputStyle}
+                type="password"
+                id="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="••••••••"
+              />
+            </div>
+            <div style={buttonWrapperStyle}>
+              <button style={buttonStyle} type="submit">
+                Sign In
+              </button>
+            </div>
+          </form>
           <div style={extraLinksStyle}>
             <p style={{ margin: 0 }}>Forgot your password?</p>
             <p style={{ margin: 0 }}>Help ‑ Support Service</p>
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
       <footer style={footerStyle}>
-        <nav>
-          <a href="/support" style={footerLinkStyle}>Support</a>
-          <a href="/data-security" style={footerLinkStyle}>Data Security</a>
-          <a href="/info" style={footerLinkStyle}>Info</a>
-        </nav>
-        <p style={{ marginTop: '0.5rem', color: '#777' }}>&copy; 2025 NextNest</p>
+        {/* … */}
       </footer>
     </div>
   );

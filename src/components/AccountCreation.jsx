@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/Logo.png';
+import { AuthContext } from '../context/AuthContext';
 
 const AccountCreation = () => {
   const navigate = useNavigate();
+  const { register } = useContext(AuthContext);
 
+  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   // ========================================
   // Shared “Page Wrapper”
   // ========================================
@@ -131,76 +139,119 @@ const AccountCreation = () => {
     fontWeight: '500',
   };
 
+  const handleCreate = () => {
+    if (password !== confirmPassword) {
+      return alert('Passwords do not match');
+    }
+    register({
+      email: email.trim(),
+      password,
+      name: `${firstName} ${name}`,
+      preferences: {
+        area: '',
+        children: null,
+        transport: '',
+        hobbies: [],
+        income: null,
+      },
+    });
+    navigate('/my-account', { state: { newAccount: true } });
+  };
+
   return (
     <div style={pageWrapperStyle}>
-      {/* -- HEADER -- */}
       <header style={headerStyle}>
         <img src={logo} alt="NextNest Logo" style={logoStyle} />
-        <div style={hamburgerStyle} onClick={() => {/* open menu */ }}>
-          <div style={hamburgerBarStyle} />
-          <div style={hamburgerBarStyle} />
-          <div style={hamburgerBarStyle} />
-        </div>
+        {/* hamburger */}
       </header>
 
-      {/* -- HERO/BACKGROUND + OVERLAYED FORM -- */}
       <section style={heroSectionStyle}>
         <div style={heroOverlayStyle}>
           <h2 style={formTitleStyle}>Create your Account</h2>
 
-          {/* Row 1 */}
           <div style={twoColumnRowStyle}>
             <div style={formGroupHalfStyle}>
               <label style={labelStyle} htmlFor="name">Name</label>
-              <input style={inputStyle} type="text" id="name" placeholder="Enter your name" />
+              <input
+                style={inputStyle}
+                type="text"
+                id="name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                placeholder="Enter your last name"
+              />
             </div>
             <div style={formGroupHalfStyle}>
               <label style={labelStyle} htmlFor="firstname">First name</label>
-              <input style={inputStyle} type="text" id="firstname" placeholder="Enter your first name" />
+              <input
+                style={inputStyle}
+                type="text"
+                id="firstname"
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)}
+                placeholder="Enter your first name"
+              />
             </div>
           </div>
 
-          {/* Row 2 */}
           <div style={twoColumnRowStyle}>
             <div style={formGroupHalfStyle}>
               <label style={labelStyle} htmlFor="mail">Mail</label>
-              <input style={inputStyle} type="email" id="mail" placeholder="Enter your email" />
+              <input
+                style={inputStyle}
+                type="email"
+                id="mail"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Enter your email"
+              />
             </div>
             <div style={formGroupHalfStyle}>
               <label style={labelStyle} htmlFor="address">Address</label>
-              <input style={inputStyle} type="text" id="address" placeholder="Enter your address" />
+              <input
+                style={inputStyle}
+                type="text"
+                id="address"
+                value={address}
+                onChange={e => setAddress(e.target.value)}
+                placeholder="Enter your address"
+              />
             </div>
           </div>
 
-          {/* Row 3 */}
           <div style={twoColumnRowStyle}>
             <div style={formGroupHalfStyle}>
               <label style={labelStyle} htmlFor="password">Password</label>
-              <input style={inputStyle} type="password" id="password" placeholder="Enter your password" />
+              <input
+                style={inputStyle}
+                type="password"
+                id="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Enter your password"
+              />
             </div>
             <div style={formGroupHalfStyle}>
               <label style={labelStyle} htmlFor="confirmPassword">Confirm Password</label>
-              <input style={inputStyle} type="password" id="confirmPassword" placeholder="Re‑enter your password" />
+              <input
+                style={inputStyle}
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+                placeholder="Re‑enter your password"
+              />
             </div>
           </div>
 
-          <button
-            style={createBtnStyle}
-            onClick={() => navigate('/my-account', { state: { newAccount: true } })}
-          >
+          <button style={createBtnStyle} onClick={handleCreate}>
             Create Account
           </button>
         </div>
       </section>
 
-      {/* -- FOOTER -- */}
       <footer style={footerStyle}>
-        <nav>
-          <a href="/support" style={footerLinkStyle}>Support</a>
-          <a href="/data-security" style={footerLinkStyle}>Data Security</a>
-          <a href="/info" style={footerLinkStyle}>Info</a>
-        </nav>
-        <p style={{ marginTop: '0.5rem', color: '#777' }}>&copy; 2025 NextNest</p>
+        {/* … */}
       </footer>
     </div>
   );

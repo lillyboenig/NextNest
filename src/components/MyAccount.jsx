@@ -1,11 +1,13 @@
 // src/components/MyAccount.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../images/Logo.png';
+import { AuthContext } from '../context/AuthContext';
 
 const MyAccount = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { currentUser, logout } = useContext(AuthContext);
   const [showPreferencesModal, setShowPreferencesModal] = useState(false);
 
   useEffect(() => {
@@ -178,7 +180,9 @@ const MyAccount = () => {
       {/* HERO + ACCOUNT DASHBOARD */}
       <section style={heroSectionStyle}>
         <div style={heroOverlayStyle}>
-          <h2 style={greetingStyle}>Hello, Matti!</h2>
+          <h2 style={greetingStyle}>
+            Hello, {currentUser?.name || 'there'}!
+          </h2>
 
           <div style={gridStyle}>
             <button style={buttonStyle} onClick={() => navigate('/preferences')}>
@@ -202,10 +206,19 @@ const MyAccount = () => {
           </div>
 
           <div style={extraLinksStyle}>
-            <span onClick={() => navigate('/support')} style={{ cursor: 'pointer' }}>
+            <span
+              style={{ cursor: 'pointer' }}
+              onClick={() => navigate('/support')}
+            >
               Help – Support Service
             </span>
-            <span onClick={() => {/* logout logic */}} style={{ cursor: 'pointer' }}>
+            <span
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                logout();
+                navigate('/login');
+              }}
+            >
               Log out
             </span>
           </div>
@@ -222,7 +235,7 @@ const MyAccount = () => {
         <p style={{ marginTop: '0.5rem', color: '#777' }}>&copy; 2025 NextNest</p>
       </footer>
 
-      {/* MODAL */}
+      {/* PREFERENCES MODAL */}
       {showPreferencesModal && (
         <div style={modalOverlayStyle}>
           <div style={modalContentStyle}>
