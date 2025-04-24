@@ -11,6 +11,13 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const handleSignIn = () => {
+    if (login(email, password)) {
+      navigate('/my-account');
+    } else {
+      alert('Invalid credentials');
+    }
+  }
   // -----------------------------------
   // Page wrapper
   // -----------------------------------
@@ -21,6 +28,7 @@ const Login = () => {
     fontFamily: "'Roboto', sans-serif",
     color: '#333',
   };
+
 
   // -----------------------------------
   // HEADER (same as other pages)
