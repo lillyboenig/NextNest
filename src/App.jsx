@@ -6,7 +6,6 @@ import Login from './components/Login';
 import MyAccount from './components/MyAccount';
 import Preferences from './components/Preferences';
 import MapPage from './components/MapPage';
-import './App.css';
 
 function App() {
   return (
