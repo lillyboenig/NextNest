@@ -14,6 +14,7 @@ const Welcome = () => {
     minHeight: '100vh',
     fontFamily: "'Roboto', sans-serif",
     color: '#333',
+    width: '100%',
   };
 
   const headerStyle = {
@@ -24,6 +25,7 @@ const Welcome = () => {
     padding: '0 2rem',
     backgroundColor: '#fff',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    width: '100%',
   };
 
   const logoStyle = { height: '40px', width: 'auto' };
@@ -45,11 +47,13 @@ const Welcome = () => {
     padding: '4rem 2rem',
     textAlign: 'center',
     color: '#fff',
+    width: '100%',
   };
 
   const heroOverlayStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: '3rem 2rem',
+    width: '100%',
   };
 
   const heroTitleStyle = {
@@ -63,9 +67,10 @@ const Welcome = () => {
     margin: '0 auto 2rem',
     maxWidth: '700px',
     lineHeight: 1.6,
+    width: '100%',
   };
 
-  const heroButtonContainerStyle = { marginTop: '3rem' };
+  const heroButtonContainerStyle = { marginTop: '3rem', width: '100%' };
 
   const primaryButtonStyle = {
     backgroundColor: '#24295B',
@@ -92,15 +97,20 @@ const Welcome = () => {
     backgroundColor: '#f9f9f9',
     padding: '3rem 2rem',
     textAlign: 'center',
+    width: '100%',
   };
 
-  const whyContainerStyle = { maxWidth: '900px', margin: '0 auto' };
+  const whyContainerStyle = {
+    width: '100%',
+  };
+
   const whyHeaderStyle = {
     fontSize: '2rem',
     marginBottom: '2rem',
     color: '#24295B',
     fontWeight: 'bold',
   };
+
   const whyParagraphStyle = {
     textAlign: 'left',
     lineHeight: 1.6,
@@ -130,8 +140,7 @@ const Welcome = () => {
     justifyContent: 'space-around',
     flexWrap: 'wrap',
     padding: '2rem 1rem',
-    maxWidth: '1100px',
-    margin: '0 auto',
+    width: '100%',
   };
 
   const cardStyle = {
@@ -160,6 +169,7 @@ const Welcome = () => {
     textAlign: 'center',
     padding: '1rem',
     borderTop: '1px solid #ccc',
+    width: '100%',
   };
   const footerLinkStyle = {
     margin: '0 1rem',

@@ -1,8 +1,7 @@
-// src/components/Preferences.jsx
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../images/Logo.png';
 import { AuthContext } from '../context/AuthContext';
+import logo from '../images/Logo.png';
 
 const Preferences = () => {
   const navigate = useNavigate();
@@ -68,7 +67,6 @@ const Preferences = () => {
           ...m,
           { sender: 'bot', text: 'Fantastic—everything is set! Ready to explore your personalized NextNest.' },
         ]);
-
         const [ area, kids, transport, hobbies, inc ] = answersRef.current;
         updatePreferences({
           area,
@@ -88,6 +86,7 @@ const Preferences = () => {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
+    width: '100%',
     fontFamily: "'Roboto', sans-serif",
     color: '#333',
   };
@@ -98,6 +97,7 @@ const Preferences = () => {
     padding: '0.75rem 2rem',
     backgroundColor: '#fff',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    width: '100%',
   };
   const heroSectionStyle = {
     position: 'relative',
@@ -107,6 +107,7 @@ const Preferences = () => {
     backgroundPosition: 'center',
     flex: 1,
     padding: '6rem 2rem',
+    width: '100%',
   };
   const overlayStyle = {
     backgroundColor: 'rgba(255,255,255,0.9)',
@@ -114,11 +115,9 @@ const Preferences = () => {
     borderRadius: '8px',
     padding: '2rem 1.5rem',
     width: '100%',
-    maxWidth: '600px',
-    margin: '0 auto',
+    height: '75vh',
     display: 'flex',
     flexDirection: 'column',
-    height: '75vh',
     boxSizing: 'border-box',
   };
   const titleStyle = {
@@ -133,6 +132,7 @@ const Preferences = () => {
     padding: '0.5rem 0',
     display: 'flex',
     flexDirection: 'column',
+    width: '100%',
   };
   const bubbleBaseStyle = {
     maxWidth: '80%',
@@ -149,7 +149,7 @@ const Preferences = () => {
   };
   const userBubbleStyle = {
     ...bubbleBaseStyle,
-    backgroundColor: '#999999',
+    backgroundColor: '#999',
     color: '#fff',
     alignSelf: 'flex-end',
   };
@@ -157,6 +157,7 @@ const Preferences = () => {
     display: 'flex',
     borderTop: '1px solid #ccc',
     paddingTop: '0.75rem',
+    width: '100%',
   };
   const inputStyle = {
     flex: 1,
@@ -178,6 +179,7 @@ const Preferences = () => {
     display: 'flex',
     justifyContent: 'space-around',
     marginTop: '1rem',
+    width: '100%',
   };
   const finalBtnStyle = {
     padding: '0.75rem 1.5rem',
@@ -192,6 +194,7 @@ const Preferences = () => {
     textAlign: 'center',
     padding: '1rem',
     borderTop: '1px solid #ccc',
+    width: '100%',
   };
 
   return (
