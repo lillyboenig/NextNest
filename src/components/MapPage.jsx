@@ -8,11 +8,11 @@ import { AuthContext } from "../context/AuthContext";
 import { LAYER_DATA } from "../data/LayerData";
 
 const ratingColor5 = {
-  1: "#e74c3c",
-  2: "#e67e22",
-  3: "#f1c40f",
-  4: "#2ecc71",
-  5: "#27ae60"
+  1: "#e74c3c", // Very Poor
+  2: "#e67e22", // Poor
+  3: "#f1c40f", // Average
+  4: "#2ecc71", // Good
+  5: "#27ae60"  // Excellent
 };
 
 function getMedian(arr) {
@@ -24,18 +24,21 @@ function getMedian(arr) {
 }
 
 const areaCenters = {
-  Oulu: [65.0121, 25.4682],
-  Helsinki: [60.1699, 24.9384]
+  Oulu:      [65.0121, 25.4682],
+  Helsinki:  [60.1699, 24.9384]
 };
 
 const MapPage = () => {
   const { currentUser } = useContext(AuthContext);
   const rawArea = currentUser?.preferences.area || "Oulu";
+  // Normalize area string to match your keys exactly
   const area = rawArea.charAt(0).toUpperCase() + rawArea.slice(1).toLowerCase();
   const dataForArea = LAYER_DATA[area] || {};
   const isUser1 = area === "Oulu";
+
   const initialCenter = areaCenters[area] || areaCenters.Oulu;
 
+  // Fetch WKT CSV → GeoJSON
   const [geoData, setGeoData] = useState(null);
   useEffect(() => {
     fetch("/finland-postal-codes-with-polygons.csv")
@@ -59,25 +62,39 @@ const MapPage = () => {
       .catch(console.error);
   }, []);
 
+  // Toggle states
+  const [showChildren, setShowChildren]       = useState(true);
+  const [showSchools, setShowSchools]         = useState(false);
+  const [showTransport, setShowTransport]     = useState(false);
+  const [showHiking, setShowHiking]           = useState(false);
+  const [showHousing, setShowHousing]         = useState(false);
+  const [showKindergartens, setShowKindergartens] = useState(false);
+  const [showBikeLanes, setShowBikeLanes]     = useState(false);
+  const [showSkiSlopes, setShowSkiSlopes]     = useState(false);
+
   const styleCombined = feature => {
     const code = feature.properties.postalCode;
     const keys = [];
-    if (showChildren)       keys.push("children");
-    if (showHousing)        keys.push("housing");
+
+    if (showChildren) keys.push("children");
+    if (showHousing)  keys.push("housing");
     if (isUser1) {
-      if (showSchools)      keys.push("schools");
-      if (showTransport)    keys.push("transport");
-      if (showHiking)       keys.push("hiking");
+      if (showSchools)   keys.push("schools");
+      if (showTransport) keys.push("transport");
+      if (showHiking)    keys.push("hiking");
     } else {
       if (showKindergartens) keys.push("kindergartens");
       if (showBikeLanes)     keys.push("bikeLanes");
       if (showSkiSlopes)     keys.push("skiSlopes");
     }
+
     const vals = keys
       .map(k => dataForArea[code]?.[k])
       .filter(v => typeof v === "number");
+
     if (!vals.length) return { fillOpacity: 0 };
-    const median = Math.round(getMedian(vals));
+
+    const median = Math.round(getMedian(vals)); 
     return {
       fillColor: ratingColor5[median] || "#ccc",
       weight: 1,
@@ -86,65 +103,21 @@ const MapPage = () => {
     };
   };
 
-  // Toggle states
-  const [showChildren, setShowChildren]             = useState(true);
-  const [showSchools, setShowSchools]               = useState(false);
-  const [showTransport, setShowTransport]           = useState(false);
-  const [showHiking, setShowHiking]                 = useState(false);
-  const [showHousing, setShowHousing]               = useState(false);
-  const [showKindergartens, setShowKindergartens]   = useState(false);
-  const [showBikeLanes, setShowBikeLanes]           = useState(false);
-  const [showSkiSlopes, setShowSkiSlopes]           = useState(false);
-
-  // === Styles ===
-  const page = {
-    display: "flex",
-    flexDirection: "column",
-    height: "100vh",
-    width: "100%",
-    fontFamily: "'Roboto', sans-serif"
-  };
-  const header = {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "1rem 2rem",
-    backgroundColor: "#fff",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-    width: "100%",
-    zIndex: 1000
-  };
-  const content = {
-    display: "flex",
-    flex: 1,
-    position: "relative",
-    width: "100%"
-  };
-  const sidebar = {
-    position: "absolute",
-    top: "100px",
-    left: "1rem",
-    width: "300px",
-    backgroundColor: "rgba(255,255,255,0.97)",
-    borderRadius: "8px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-    padding: "1.5rem",
-    zIndex: 500
-  };
-  const title = { fontSize: "1.4rem", marginBottom: "0.5rem", color: "#24295B" };
-  const desc = { fontSize: "0.95rem", marginBottom: "1rem", color: "#555", lineHeight: 1.4 };
-  const label = { display: "flex", alignItems: "center", marginBottom: "0.75rem", color: "#333" };
-  const legendTitle = { fontSize: "1rem", fontWeight: "bold", margin: "1rem 0 0.5rem" };
+  // Styles
+  const page =       { display: "flex", flexDirection: "column", height: "100vh", fontFamily: "'Roboto', sans-serif'" };
+  const header =     { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem 2rem", backgroundColor: "#fff", boxShadow: "0 2px 4px rgba(0,0,0,0.1)", zIndex: 1000 };
+  const hamburger =  { display: "flex", flexDirection: "column", gap: "4px", cursor: "pointer" };
+  const bar =        { width: "25px", height: "3px", backgroundColor: "#24295B" };
+  const content =    { display: "flex", flex: 1, position: "relative" };
+  const sidebar =    { position: "absolute", top: "100px", left: "1rem", width: "300px", backgroundColor: "rgba(255,255,255,0.97)", borderRadius: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.15)", padding: "1.5rem", zIndex: 500 };
+  const title =      { fontSize: "1.4rem", marginBottom: "0.5rem", color: "#24295B" };
+  const desc =       { fontSize: "0.95rem", marginBottom: "1rem", color: "#555", lineHeight: 1.4 };
+  const label =      { display: "flex", alignItems: "center", marginBottom: "0.65rem", color: "#333", fontSize: "1rem" };
+  const legendTitle ={ fontSize: "1rem", fontWeight: "bold", margin: "1rem 0 0.5rem" };
   const legendItem = { display: "flex", alignItems: "center", marginBottom: "0.25rem" };
   const colorBox = c => ({ width: "16px", height: "16px", backgroundColor: c, marginRight: "0.5rem", border: "1px solid #aaa" });
-  const mapArea = { flex: 1, width: "100%" };
-  const footer = {
-    textAlign: "center",
-    padding: "1rem",
-    backgroundColor: "#fafafa",
-    borderTop: "1px solid #ccc",
-    width: "100%"
-  };
+  const mapArea =    { flex: 1, margin: 0 };
+  const footer =     { textAlign: "center", padding: "1rem", backgroundColor: "#fafafa", borderTop: "1px solid #ccc" };
   
   return (
     <div style={page}>

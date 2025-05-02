@@ -10,63 +10,86 @@ const MyAccount = () => {
   const [showPreferencesModal, setShowPreferencesModal] = useState(false);
 
   useEffect(() => {
-    if (location.state?.newAccount) {
+    if (location.state && location.state.newAccount) {
       setShowPreferencesModal(true);
     }
   }, [location.state]);
 
-  // === Styles ===
+  // -----------------------------------
+  // Page wrapper (shared)
+  // -----------------------------------
   const pageWrapperStyle = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    width: '100%',
     fontFamily: "'Roboto', sans-serif",
     color: '#333',
   };
+
+  // -----------------------------------
+  // HEADER (shared)
+  // -----------------------------------
   const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '64px',
-    padding: '0 2rem',
+    padding: '0.75rem 2rem',
     backgroundColor: '#fff',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    width: '100%',
   };
+  const logoStyle = { height: '40px', width: 'auto' };
+  const hamburgerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+    cursor: 'pointer',
+  };
+  const hamburgerBarStyle = {
+    width: '25px',
+    height: '3px',
+    backgroundColor: '#24295B',
+  };
+
+  // -----------------------------------
+  // HERO (background + overlay)
+  // -----------------------------------
   const heroSectionStyle = {
     position: 'relative',
     backgroundImage:
-      "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg')",
+      "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     padding: '6rem 2rem',
     flex: 1,
-    width: '100%',
   };
   const heroOverlayStyle = {
     backgroundColor: 'rgba(255,255,255,0.85)',
     padding: '3rem 2rem',
     borderRadius: '8px',
-    border: '2px solid #24295B',
     width: '100%',
-    boxSizing: 'border-box',
-    display: 'flex',
-    flexDirection: 'column',
+    maxWidth: '900px',
+    margin: '0 auto',
+    textAlign: 'left',
   };
+
+  // -----------------------------------
+  // Content styles
+  // -----------------------------------
   const greetingStyle = {
     fontSize: '2rem',
     color: '#24295B',
     marginBottom: '2rem',
     textAlign: 'center',
   };
+
+  // grid for 2 columns × 3 rows
   const gridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gridTemplateColumns: '1fr 1fr',
     gap: '1rem 2rem',
     marginBottom: '2rem',
-    width: '100%',
   };
+
   const buttonStyle = {
     padding: '0.75rem',
     borderRadius: '4px',
@@ -77,20 +100,23 @@ const MyAccount = () => {
     cursor: 'pointer',
     width: '100%',
   };
+
   const extraLinksStyle = {
     display: 'flex',
     justifyContent: 'flex-end',
     gap: '2rem',
     color: '#24295B',
     fontSize: '0.9rem',
-    width: '100%',
   };
+
+  // -----------------------------------
+  // FOOTER (shared)
+  // -----------------------------------
   const footerStyle = {
     backgroundColor: '#fafafa',
     textAlign: 'center',
     padding: '1rem',
     borderTop: '1px solid #ccc',
-    width: '100%',
   };
   const footerLinkStyle = {
     margin: '0 1rem',
@@ -98,14 +124,15 @@ const MyAccount = () => {
     color: '#24295B',
     fontWeight: '500',
   };
+
+  // -----------------------------------
+  // MODAL (shared pattern)
+  // -----------------------------------
   const modalOverlayStyle = {
     position: 'fixed',
-    top: 0, left: 0,
-    width: '100%', height: '100%',
+    top: 0, left: 0, width: '100%', height: '100%',
     backgroundColor: 'rgba(0,0,0,0.7)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: 'flex', justifyContent: 'center', alignItems: 'center',
     zIndex: 1000,
   };
   const modalContentStyle = {
@@ -113,10 +140,9 @@ const MyAccount = () => {
     backgroundColor: '#fff',
     padding: '2rem',
     borderRadius: '8px',
-    width: '90%',
     maxWidth: '500px',
+    width: '90%',
     textAlign: 'center',
-    boxSizing: 'border-box',
   };
   const modalButtonStyle = {
     marginTop: '1rem',
@@ -137,7 +163,6 @@ const MyAccount = () => {
     fontSize: '1.2rem',
     cursor: 'pointer',
   };
-
   return (
     <div style={pageWrapperStyle}>
       {/* HEADER */}
@@ -154,7 +179,7 @@ const MyAccount = () => {
       <section style={heroSectionStyle}>
         <div style={heroOverlayStyle}>
           <h2 style={greetingStyle}>
-            Hello, {currentUser?.name || 'there'}!
+            Hello, Emma!
           </h2>
 
           <div style={gridStyle}>

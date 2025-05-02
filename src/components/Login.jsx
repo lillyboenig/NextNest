@@ -11,53 +11,75 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    setError('');
-    if (!login(email.trim(), password)) {
-      setError('Invalid email or password');
-      return;
+  const handleSignIn = () => {
+    if (login(email, password)) {
+      navigate('/my-account');
+    } else {
+      alert('Invalid credentials');
     }
-    navigate('/my-account');
-  };
-
-  // === Styles ===
+  }
+  // -----------------------------------
+  // Page wrapper
+  // -----------------------------------
   const pageWrapperStyle = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    width: '100%',
     fontFamily: "'Roboto', sans-serif",
     color: '#333',
   };
+
+
+  // -----------------------------------
+  // HEADER (same as other pages)
+  // -----------------------------------
   const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '64px',
-    padding: '0 2rem',
+    padding: '0.75rem 2rem',
     backgroundColor: '#fff',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    width: '100%',
   };
+  const logoStyle = { height: '40px', width: 'auto' };
+  const hamburgerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+    cursor: 'pointer',
+  };
+  const hamburgerBarStyle = {
+    width: '25px',
+    height: '3px',
+    backgroundColor: '#24295B',
+  };
+
+  // -----------------------------------
+  // HERO (background + overlay)
+  // -----------------------------------
   const heroSectionStyle = {
     position: 'relative',
     backgroundImage:
-      "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg')",
+      "url('https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    flex: 1,
     padding: '6rem 2rem',
-    width: '100%',
+    textAlign: 'center',
+    flex: 1,
   };
   const heroOverlayStyle = {
     backgroundColor: 'rgba(255,255,255,0.85)',
     padding: '3rem 2rem',
     borderRadius: '8px',
     width: '100%',
-    boxSizing: 'border-box',
+    maxWidth: '500px',
+    margin: '0 auto',
     textAlign: 'left',
   };
+
+  // -----------------------------------
+  // Form styles
+  // -----------------------------------
   const formTitleStyle = {
     fontSize: '2rem',
     color: '#24295B',
@@ -68,7 +90,6 @@ const Login = () => {
     display: 'flex',
     flexDirection: 'column',
     marginBottom: '1.5rem',
-    width: '100%',
   };
   const labelStyle = {
     marginBottom: '0.5rem',
@@ -81,13 +102,10 @@ const Login = () => {
     borderRadius: '4px',
     border: '1px solid #ccc',
     fontSize: '1rem',
-    width: '100%',
-    boxSizing: 'border-box',
   };
   const buttonWrapperStyle = {
     display: 'flex',
     justifyContent: 'flex-end',
-    width: '100%',
   };
   const buttonStyle = {
     marginTop: '1rem',
@@ -104,16 +122,35 @@ const Login = () => {
     fontSize: '0.9rem',
     color: '#24295B',
     lineHeight: 1.5,
-    width: '100%',
-    textAlign: 'center',
   };
+
+  // -----------------------------------
+  // FOOTER (same as other pages)
+  // -----------------------------------
   const footerStyle = {
     backgroundColor: '#fafafa',
     textAlign: 'center',
     padding: '1rem',
     borderTop: '1px solid #ccc',
-    width: '100%',
   };
+  const footerLinkStyle = {
+    margin: '0 1rem',
+    textDecoration: 'none',
+    color: '#24295B',
+    fontWeight: '500',
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+    const ok = login(email.trim(), password);
+    if (!ok) {
+      setError('Invalid email or password');
+      return;
+    }
+    navigate('/my-account');
+  };
+  
   return (
     <div style={pageWrapperStyle}>
       <header style={headerStyle}>
